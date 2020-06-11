@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e19d3f2b-3f2c-45d2-b380-356a0ccfa1ab" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dqn/agent.py" beforeDir="false" afterPath="$PROJECT_DIR$/dqn/agent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dqn/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/dqn/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dqn/environment.py" beforeDir="false" afterPath="$PROJECT_DIR$/dqn/environment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dqn/history.py" beforeDir="false" afterPath="$PROJECT_DIR$/dqn/history.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dqn/ops.py" beforeDir="false" afterPath="$PROJECT_DIR$/dqn/ops.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dqn/replay_memory.py" beforeDir="false" afterPath="$PROJECT_DIR$/dqn/replay_memory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dqn/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/dqn/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1bkq5LblE0u0ZU57uzjz7QHtDYT" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python">
+      <module name="DQN-tensorflow" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="D:\DQN\DQN-tensorflow\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="--env_name=BreakoutNoFrameskip-v0 --is_train=True" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e19d3f2b-3f2c-45d2-b380-356a0ccfa1ab" name="Default Changelist" comment="" />
+      <created>1589186254427</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1589186254427</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="586" y="198" key="#Inspections" timestamp="1589911353844">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="586" y="198" key="#Inspections/0.0.1920.1040@0.0.1920.1040" timestamp="1589911353844" />
+    <state x="946" y="0" width="974" height="527" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591880524651">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="946" y="0" width="974" height="527" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591880524651" />
+    <state x="260" y="225" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1589951886698">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="260" y="225" key="#com.intellij.ide.macro.MacrosDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1589951886698" />
+    <state x="1059" y="210" key="FileChooserDialogImpl" timestamp="1591856537527">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1059" y="210" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591856537527" />
+    <state width="936" height="268" key="GridCell.Tab.0.bottom" timestamp="1591762191089">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="936" height="268" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591762191089" />
+    <state width="936" height="268" key="GridCell.Tab.0.center" timestamp="1591762191089">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="936" height="268" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591762191089" />
+    <state width="936" height="268" key="GridCell.Tab.0.left" timestamp="1591762191089">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="936" height="268" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591762191089" />
+    <state width="936" height="268" key="GridCell.Tab.0.right" timestamp="1591762191089">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="936" height="268" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591762191089" />
+    <state x="37" y="108" key="SettingsEditor" timestamp="1589951312155">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="37" y="108" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1589951312155" />
+    <state x="682" y="431" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1589816560483">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="682" y="431" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1589816560483" />
+  </component>
+</project>

@@ -1,5 +1,6 @@
 import numpy as np
 
+# 화면을 받음
 class History:
   def __init__(self, config):
     self.cnn_format = config.cnn_format
@@ -18,6 +19,8 @@ class History:
     self.history *= 0
 
   def get(self):
+    # NHWC란?
+    # [batch, height, width, channel]
     if self.cnn_format == 'NHWC':
       return np.transpose(self.history, (1, 2, 0))
     else:

@@ -2,6 +2,8 @@ from __future__ import print_function
 import os
 import time
 import random
+from functools import reduce
+
 import numpy as np
 from tqdm import tqdm
 import tensorflow as tf
@@ -11,6 +13,11 @@ from .history import History
 from .replay_memory import ReplayMemory
 from .ops import linear, conv2d, clipped_error
 from .utils import get_time, save_pkl, load_pkl
+
+# failed to create cublas handle: CUBLAS_STATUS_ALLOC_FAILED 오류 해결을 위해
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True
+session = tf.Session(config=config)
 
 class Agent(BaseModel):
   def __init__(self, config, environment, sess):
@@ -33,16 +40,20 @@ class Agent(BaseModel):
     start_step = self.step_op.eval()
     start_time = time.time()
 
+    # 사용할 변수들 선언
     num_game, self.update_count, ep_reward = 0, 0, 0.
     total_reward, self.total_loss, self.total_q = 0., 0., 0.
     max_avg_ep_reward = 0
     ep_rewards, actions = [], []
 
+    # step을 진행하기전에는 반드시 reset()함수가 먼저 실행되어야 합니다.
+    self.env.env.reset()
     screen, reward, action, terminal = self.env.new_random_game()
 
     for _ in range(self.history_length):
       self.history.add(screen)
 
+    # step을 몇번하느냐가 학습 횟수의 기준. episode가 기준이 아님
     for self.step in tqdm(range(start_step, self.max_step), ncols=70, initial=start_step):
       if self.step == self.learn_start:
         num_game, self.update_count, ep_reward = 0, 0, 0.
@@ -56,6 +67,7 @@ class Agent(BaseModel):
       # 3. observe
       self.observe(screen, reward, action, terminal)
 
+      # 해당 게임의 목숨을 다하여 끝났을 경우
       if terminal:
         screen, reward, action, terminal = self.env.new_random_game()
 
@@ -68,6 +80,7 @@ class Agent(BaseModel):
       actions.append(action)
       total_reward += reward
 
+      # check point 지점을 지날때마다 아래의 값을 터미널에 표시함
       if self.step >= self.learn_start:
         if self.step % self.test_step == self.test_step - 1:
           avg_reward = total_reward / self.test_step
@@ -113,6 +126,9 @@ class Agent(BaseModel):
           ep_rewards = []
           actions = []
 
+          # 하나의 step 학습이 끝남, 매번 step 마다 학습하는 것임.
+
+  # action을 선택할때 어떻게 선택할지 결정하는 함수
   def predict(self, s_t, test_ep=None):
     ep = test_ep or (self.ep_end +
         max(0., (self.ep_start - self.ep_end)
@@ -128,6 +144,7 @@ class Agent(BaseModel):
   def observe(self, screen, reward, action, terminal):
     reward = max(self.min_reward, min(self.max_reward, reward))
 
+    # history에는 화면만 기억되는거 같음(정확한 확인 필요)
     self.history.add(screen)
     self.memory.add(screen, reward, action, terminal)
 
@@ -214,7 +231,7 @@ class Agent(BaseModel):
           linear(self.adv_hid, self.env.action_size, name='adv_out')
 
         # Average Dueling
-        self.q = self.value + (self.advantage - 
+        self.q = self.value + (self.advantage -
           tf.reduce_mean(self.advantage, reduction_indices=1, keep_dims=True))
       else:
         self.l4, self.w['l4_w'], self.w['l4_b'] = linear(self.l3_flat, 512, activation_fn=activation_fn, name='l4')
@@ -224,20 +241,20 @@ class Agent(BaseModel):
 
       q_summary = []
       avg_q = tf.reduce_mean(self.q, 0)
-      for idx in xrange(self.env.action_size):
+      for idx in range(self.env.action_size):
         q_summary.append(tf.summary.histogram('q/%s' % idx, avg_q[idx]))
       self.q_summary = tf.summary.merge(q_summary, 'q_summary')
 
     # target network
     with tf.variable_scope('target'):
       if self.cnn_format == 'NHWC':
-        self.target_s_t = tf.placeholder('float32', 
+        self.target_s_t = tf.placeholder('float32',
             [None, self.screen_height, self.screen_width, self.history_length], name='target_s_t')
       else:
-        self.target_s_t = tf.placeholder('float32', 
+        self.target_s_t = tf.placeholder('float32',
             [None, self.history_length, self.screen_height, self.screen_width], name='target_s_t')
 
-      self.target_l1, self.t_w['l1_w'], self.t_w['l1_b'] = conv2d(self.target_s_t, 
+      self.target_l1, self.t_w['l1_w'], self.t_w['l1_b'] = conv2d(self.target_s_t,
           32, [8, 8], [4, 4], initializer, activation_fn, self.cnn_format, name='target_l1')
       self.target_l2, self.t_w['l2_w'], self.t_w['l2_b'] = conv2d(self.target_l1,
           64, [4, 4], [2, 2], initializer, activation_fn, self.cnn_format, name='target_l2')
@@ -261,7 +278,7 @@ class Agent(BaseModel):
           linear(self.t_adv_hid, self.env.action_size, name='target_adv_out')
 
         # Average Dueling
-        self.target_q = self.t_value + (self.t_advantage - 
+        self.target_q = self.t_value + (self.t_advantage -
           tf.reduce_mean(self.t_advantage, reduction_indices=1, keep_dims=True))
       else:
         self.target_l4, self.t_w['l4_w'], self.t_w['l4_b'] = \
@@ -301,8 +318,9 @@ class Agent(BaseModel):
               self.learning_rate_decay_step,
               self.learning_rate_decay,
               staircase=True))
-      self.optim = tf.train.RMSPropOptimizer(
-          self.learning_rate_op, momentum=0.95, epsilon=0.01).minimize(self.loss)
+      #self.optim = tf.train.RMSPropOptimizer(
+      #    self.learning_rate_op, momentum=0.95, epsilon=0.01).minimize(self.loss)
+      self.optim = tf.train.AdamOptimizer().minimize(self.loss)
 
     with tf.variable_scope('summary'):
       scalar_summary_tags = ['average.reward', 'average.loss', 'average.q', \
@@ -325,8 +343,7 @@ class Agent(BaseModel):
 
     tf.initialize_all_variables().run()
 
-    self._saver = tf.train.Saver(self.w.values() + [self.step_op], max_to_keep=30)
-
+    self._saver = tf.train.Saver(list(self.w.values()) + [self.step_op], max_to_keep=30)
     self.load_model()
     self.update_target_q_network()
 
@@ -373,7 +390,9 @@ class Agent(BaseModel):
       self.env.env.monitor.start(gym_dir)
 
     best_reward, best_idx = 0, 0
-    for idx in xrange(n_episode):
+    self.env.env.reset()
+
+    for idx in range(n_episode):
       screen, reward, action, terminal = self.env.new_random_game()
       current_reward = 0
 
