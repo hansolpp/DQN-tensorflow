@@ -16,6 +16,10 @@ https://github.com/devsisters/DQN-tensorflow/blob/master/README.md
 
  
 
+```
+<iframe width="640" height="360" src="https://youtu.be/XSTCHqiIQJE" frameborder="0" gesture="media" allowfullscreen=""></iframe>
+```
+
 
 
 ## 프로젝트 목적
