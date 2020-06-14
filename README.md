@@ -10,9 +10,13 @@ https://github.com/devsisters/DQN-tensorflow/blob/master/README.md
 
 ![Break_out](https://user-images.githubusercontent.com/57663398/84415607-f6206980-ac4d-11ea-8577-1385f4919b83.gif) 
 
+  
 
+공을 튀기는 바가 왼쪽에 계속 있으려는 모습을 볼수 있는데, 깨야할 벽의 모서리 부분을 공략하여 뒤 벽에 넘기가 위해서 인것 같다.
 
  
+
+
 
 ## 프로젝트 목적
 
